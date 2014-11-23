@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>WebGL Bunny Shader Test - 23/11/14 - abduhslab</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #FFFFFF;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			a {
+				color:#0078ff;
+			}
+
+			canvas {
+				padding-left: 0;
+			    padding-right: 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    display: block;background-color: #000000;
+			}
+		</style>
+	</head>
+	<script src="js/gl-matrix-min.js"></script>
+	<script src="js/BunnyData.js"></script>
+	<script src="js/webgl_bunny.js"></script>
+	<script id="vshader" type="x-shader/x-vertex">
+
+	    attribute vec4 aPosition;
+	    attribute vec3 aColor;
+	 	uniform mat4 aProjectionMatrix;
+		uniform mat4 aModelViewMatrix;
+		varying vec3 color;
+
+		void main() {
+		    gl_Position =  aProjectionMatrix * aModelViewMatrix *  aPosition ;
+		    color = aColor;
+		}
+
+	</script>
+
+	<script id="fshader" type="x-shader/x-fragment">
+	precision mediump float;
+		varying vec3 color;
+
+		void main() {
+		    gl_FragColor = vec4(color, 1);
+		}
+
+	</script>
+		<body onload="init()">
+		<canvas id="glcanvas" width="500" height="500">
+		    Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+		  </canvas>
+
+	</body>
+</html>
